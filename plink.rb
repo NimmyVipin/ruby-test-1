@@ -13,20 +13,16 @@ op.parse!
 print 'Enter the site:'
 options[:site] = gets.chomp
 
-page =  options[:site]
-doc = Nokogiri::HTML(open(page))
-title = doc.css('title').text
-puts "Title: #{title}"
+url =  options[:site]
+doc = Nokogiri::HTML(open(url))
 
-h1 = doc.css('h1').text
-puts "h1: #{h1}"
+ary=['title','h1','h2','h3','h4']
+ary.each do |r|
+ val = doc.css(r).text 
+ puts "#{r}:"
+ print "#{val}"
+end
 
-h2 = doc.css('h2').text
-puts "h2: #{h2}"
 
-h3 = doc.css('h3').text
-puts "h3: #{h3}"
 
-h4 = doc.css('h4').text
-puts "h4: #{h4}"
 
