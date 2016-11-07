@@ -1,7 +1,19 @@
 require 'open-uri'
 require 'nokogiri'
+require 'optparse'
 
-page="https://redpanthers.co"
+options = {}
+op= OptionParser.new do|opts|
+  opts.on('-n', '--site site', 'site') do |site|
+   options[:site] = site
+  end   
+ end
+op.parse!
+
+print 'Enter the site:'
+options[:site] = gets.chomp
+
+page =  options[:site]
 doc = Nokogiri::HTML(open(page))
 title = doc.css('title').text
 puts "Title: #{title}"
