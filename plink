@@ -23,7 +23,7 @@ print "\n"
 href = doc.css("a").map do |link|
   URI::join(url, href) if (href = link.attr("href")) && !href.empty?
 end.compact.uniq
-for i in 0..href.length-1
+(0..href.length-1).each do |i|
   str=href[i].to_s
   if str.include? url
     puts "internal link:#{href[i]}"
