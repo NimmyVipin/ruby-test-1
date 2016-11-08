@@ -1,0 +1,38 @@
+#!/usr/bin/env ruby
+require 'open-uri'
+require 'nokogiri'
+require 'optparse'
+
+options = {}
+op= OptionParser.new do|opts|
+  opts.on('-n', '--website site', 'site') do |site|
+   options[:site] = site
+  end   
+ end
+op.parse!
+
+url =  options[:site]
+doc = Nokogiri::HTML(open(url))
+ary=['title','h1','h2','h3','h4']
+ary.each do |r|
+  val = doc.css(r).text 
+  puts "#{r}:"
+  puts "#{val}"
+end
+
+print "\n"
+href = doc.css("a").map do |link|
+  URI::join(url, href) if (href = link.attr("href")) && !href.empty?
+end.compact.uniq
+
+for i in 0..href.length-1
+  str=href[i].to_s
+  if str.include? url
+    puts "internal link:#{href[i]}"
+  else 
+ 	puts "external link:#{href[i]}"
+  end
+end
+
+  
+ 
