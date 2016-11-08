@@ -19,18 +19,16 @@ ary.each do |r|
   puts "#{r}:"
   puts "#{val}"
 end
-
 print "\n"
 href = doc.css("a").map do |link|
   URI::join(url, href) if (href = link.attr("href")) && !href.empty?
 end.compact.uniq
-
 for i in 0..href.length-1
   str=href[i].to_s
   if str.include? url
     puts "internal link:#{href[i]}"
   else 
- 	puts "external link:#{href[i]}"
+    puts "external link:#{href[i]}"
   end
 end
 
