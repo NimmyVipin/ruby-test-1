@@ -6,7 +6,7 @@ require 'optparse'
 options = {}
 op= OptionParser.new do|opts|
   opts.on('-n', '--website site', 'site') do |site|
-   options[:site] = site
+    options[:site] = site
   end   
 end
 op.parse!
