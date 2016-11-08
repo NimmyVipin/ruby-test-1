@@ -8,7 +8,7 @@ op= OptionParser.new do|opts|
   opts.on('-n', '--website site', 'site') do |site|
    options[:site] = site
   end   
- end
+end
 op.parse!
 
 url =  options[:site]
